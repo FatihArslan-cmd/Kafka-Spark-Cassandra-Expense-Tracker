@@ -1,7 +1,7 @@
 package com.Kafka_Spark_Cassandra_Expense_Tracker.demo.services;
 
-import com.example.swe307_project2.Repository.EmpRepository;
-import com.example.swe307_project2.model.Emp;
+import com.Kafka_Spark_Cassandra_Expense_Tracker.demo.Repository.EmpRepository;
+import com.Kafka_Spark_Cassandra_Expense_Tracker.demo.model.Emp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
