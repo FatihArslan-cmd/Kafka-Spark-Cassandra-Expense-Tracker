@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee and Department List</title>
+</head>
+<body>
+<h1>Employee and Department List</h1>
+
+<table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+    <tr>
+        <th>Employee ID</th>
+        <th>Manager</th>
+        <th>Employee Name</th>
+        <th>Job</th>
+        <th>Salary</th>
+        <th>Department Name</th>
+        <th>Location</th>
+        <th>Image</th>
+    </tr>
+    </thead>
+    <tbody id="employeeTable">
+    <!-- Data will be dynamically loaded here -->
+    </tbody>
+</table>
+
+<script>
+    async function fetchEmployeeImages() {
+        try {
+            const response = await fetch('http://localhost:8080/images');
+            const images = await response.json();
+            return images;
+        } catch (error) {
+            console.error('Error fetching images:', error);
+            return [];
+        }
+    }
+
+    async function fetchEmployees() {
+        try {
+            const [employeesResponse, images] = await Promise.all([
+                fetch('/api/employees'),
+                fetchEmployeeImages()
+            ]);
+
+            const employees = await employeesResponse.json();
+            const tableBody = document.getElementById('employeeTable');
+
+            employees.forEach(emp => {
+                const row = document.createElement('tr');
+
+                // Find manager's name
+                const manager = employees.find(manager => manager.empno === emp.mgr);
+                const managerName = manager ? manager.ename : 'N/A';
+
+                // Match employee image
+                const imageUrl = images.find(imgUrl => imgUrl.includes(emp.img)) || 'https://via.placeholder.com/50';
+
+                row.innerHTML = `
+                        <td>${emp.empno}</td>
+                        <td>${managerName}</td>
+                        <td>${emp.ename}</td>
+                        <td>${emp.job}</td>
+                        <td>${emp.sal}</td>
+                        <td>${emp.dept ? emp.dept.dname : 'N/A'}</td>
+                        <td>${emp.dept ? emp.dept.loc : 'N/A'}</td>
+                        <td><img src="${imageUrl}" alt="${emp.ename}" width="50" height="50"></td>
+                    `;
+
+                tableBody.appendChild(row);
+            });
+        } catch (error) {
+            console.error('Error fetching employees:', error);
+        }
+    }
+
+    // Call the function to fetch and display data
+    fetchEmployees();
+</script>
+</body>
+</html>
