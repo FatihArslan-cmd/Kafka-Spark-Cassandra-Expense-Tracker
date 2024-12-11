@@ -3,28 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee and Department List</title>
+    <title>Employee Directory</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #f4f6f9;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        .header h1 {
+            color: #2c3e50;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-align: center;
+        }
+        .header h1 i {
+            color: #3498db;
+        }
+        .employee-table {
+            width: 100%;
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        .employee-table thead {
+            background-color: #f8f9fa;
+        }
+        .employee-table th, .employee-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .employee-table th {
+            font-weight: 600;
+            color: #495057;
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+        .employee-table tr:hover {
+            background-color: #f1f3f5;
+            transition: background-color 0.3s ease;
+        }
+        .employee-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 500;
+        }
+        .badge-primary {
+            background-color: #3498db;
+            color: white;
+        }
+        .badge-secondary {
+            background-color: #95a5a6;
+            color: white;
+        }
+    </style>
 </head>
 <body>
-<h1>Employee and Department List</h1>
-
-<table border="1" cellpadding="5" cellspacing="0">
-    <thead>
-    <tr>
-        <th>Employee ID</th>
-        <th>Manager</th>
-        <th>Employee Name</th>
-        <th>Job</th>
-        <th>Salary</th>
-        <th>Department Name</th>
-        <th>Location</th>
-        <th>Image</th>
-    </tr>
-    </thead>
-    <tbody id="employeeTable">
-    <!-- Data will be dynamically loaded here -->
-    </tbody>
-</table>
+<div class="container">
+    <div class="header">
+        <h1><i class="fas fa-users"></i> Employee Directory</h1>
+    </div>
+    <table class="employee-table">
+        <thead>
+        <tr>
+            <th>Employee ID</th>
+            <th>Manager</th>
+            <th>Employee Name</th>
+            <th>Job</th>
+            <th>Salary</th>
+            <th>Department</th>
+            <th>Location</th>
+            <th>Image</th>
+        </tr>
+        </thead>
+        <tbody id="employeeTable">
+        <!-- Data will be dynamically loaded here -->
+        </tbody>
+    </table>
+</div>
 
 <script>
     async function fetchEmployeeImages() {
@@ -62,11 +153,11 @@
                         <td>${emp.empno}</td>
                         <td>${managerName}</td>
                         <td>${emp.ename}</td>
-                        <td>${emp.job}</td>
-                        <td>${emp.sal}</td>
+                        <td><span class="badge badge-secondary">${emp.job}</span></td>
+                        <td>$${parseFloat(emp.sal).toLocaleString()}</td>
                         <td>${emp.dept ? emp.dept.dname : 'N/A'}</td>
                         <td>${emp.dept ? emp.dept.loc : 'N/A'}</td>
-                        <td><img src="${imageUrl}" alt="${emp.ename}" width="50" height="50"></td>
+                        <td><img src="${imageUrl}" alt="${emp.ename}" class="employee-image"></td>
                     `;
 
                 tableBody.appendChild(row);
