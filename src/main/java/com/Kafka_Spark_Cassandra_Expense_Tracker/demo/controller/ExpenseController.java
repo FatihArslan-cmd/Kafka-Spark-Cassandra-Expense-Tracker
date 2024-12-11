@@ -1,19 +1,20 @@
 package com.Kafka_Spark_Cassandra_Expense_Tracker.demo.controller;
 
-import com.Kafka_Spark_Cassandra_Expense_Tracker.demo.dto.ExpenseDto;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import com.Kafka_Spark_Cassandra_Expense_Tracker.demo.services.ExpenseService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
 
 @RestController
-@RequestMapping("/api/expenses")
 public class ExpenseController {
 
-    @PostMapping
-    public ResponseEntity<String> receiveExpense(@RequestBody ExpenseDto expenseDto) {
-        // Gelen veriyi işleme (örneğin, bir veritabanına kaydetme veya loglama)
-        System.out.println("Received Expense Data: " + expenseDto);
+    @Autowired
+    private ExpenseService expenseService;
 
-        // Yanıt döndür
-        return ResponseEntity.ok("Expense data received successfully!");
+    @GetMapping("/expenses/total-payments")
+    public Map<Integer, Double> getTotalPayments() {
+        return expenseService.getTotalPaymentsByUserId();
     }
 }

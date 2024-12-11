@@ -13,23 +13,23 @@
             box-sizing: border-box;
         }
         body {
-            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: 'Poppins', sans-serif;
             background-color: #f4f6f9;
             color: #2c3e50;
-            line-height: 1.6;
+            line-height: 1.4;
         }
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 10px;
         }
         .header {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             background-color: #ffffff;
-            padding: 20px;
+            padding: 5px;
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         }
@@ -38,8 +38,9 @@
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 5px;
             text-align: center;
+            font-size: 1.0em;
         }
         .header h1 i {
             color: #3498db;
@@ -50,12 +51,13 @@
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            font-size: 0.75em;
         }
         .employee-table thead {
             background-color: #f8f9fa;
         }
         .employee-table th, .employee-table td {
-            padding: 15px;
+            padding: 7px;
             text-align: left;
             border-bottom: 1px solid #e9ecef;
         }
@@ -63,24 +65,24 @@
             font-weight: 600;
             color: #495057;
             text-transform: uppercase;
-            font-size: 0.9em;
+            font-size: 1.0em;
         }
         .employee-table tr:hover {
             background-color: #f1f3f5;
             transition: background-color 0.3s ease;
         }
         .employee-image {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             object-fit: cover;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         .badge {
             display: inline-block;
-            padding: 5px 10px;
+            padding: 4px 8px;
             border-radius: 20px;
-            font-size: 0.8em;
+            font-size: 0.9em;
             font-weight: 500;
         }
         .badge-primary {
@@ -91,16 +93,30 @@
             background-color: #95a5a6;
             color: white;
         }
+        .highlight {
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 1.2em; /* Slightly larger text */
+        }
+        @keyframes flashlight {
+            0%, 100% { box-shadow: 0 0 5px rgba(39, 174, 96, 0.3); }
+            50% { box-shadow: 0 0 20px rgba(39, 174, 96, 0.8); }
+        }
+        .payment-changed {
+            animation: flashlight 1.5s infinite;
+            background-color: rgba(39, 174, 96, 0.1);
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="header">
-        <h1><i class="fas fa-users"></i> Employee Directory</h1>
+        <h1><i class="fas fa-users"></i> Employee Directory & User Payments</h1>
     </div>
     <table class="employee-table">
         <thead>
         <tr>
+            <th>Photo</th>
             <th>Employee ID</th>
             <th>Manager</th>
             <th>Employee Name</th>
@@ -108,7 +124,7 @@
             <th>Salary</th>
             <th>Department</th>
             <th>Location</th>
-            <th>Image</th>
+            <th>Total Payment</th>
         </tr>
         </thead>
         <tbody id="employeeTable">
@@ -118,57 +134,90 @@
 </div>
 
 <script>
-    async function fetchEmployeeImages() {
+    let previousPayments = {};
+    let employeesData = [];
+    let imagesData = [];
+
+    async function fetchPayments() {
         try {
-            const response = await fetch('http://localhost:8080/images');
-            const images = await response.json();
-            return images;
+            const response = await fetch("http://localhost:8080/expenses/total-payments");
+            const data = await response.json();
+            return data;
         } catch (error) {
-            console.error('Error fetching images:', error);
-            return [];
+            console.error("Error fetching payments:", error);
+            return {};
         }
     }
 
     async function fetchEmployees() {
         try {
-            const [employeesResponse, images] = await Promise.all([
-                fetch('/api/employees'),
-                fetchEmployeeImages()
-            ]);
-
-            const employees = await employeesResponse.json();
-            const tableBody = document.getElementById('employeeTable');
-
-            employees.forEach(emp => {
-                const row = document.createElement('tr');
-
-                // Find manager's name
-                const manager = employees.find(manager => manager.empno === emp.mgr);
-                const managerName = manager ? manager.ename : 'N/A';
-
-                // Match employee image
-                const imageUrl = images.find(imgUrl => imgUrl.includes(emp.img)) || 'https://via.placeholder.com/50';
-
-                row.innerHTML = `
-                        <td>${emp.empno}</td>
-                        <td>${managerName}</td>
-                        <td>${emp.ename}</td>
-                        <td><span class="badge badge-secondary">${emp.job}</span></td>
-                        <td>$${parseFloat(emp.sal).toLocaleString()}</td>
-                        <td>${emp.dept ? emp.dept.dname : 'N/A'}</td>
-                        <td>${emp.dept ? emp.dept.loc : 'N/A'}</td>
-                        <td><img src="${imageUrl}" alt="${emp.ename}" class="employee-image"></td>
-                    `;
-
-                tableBody.appendChild(row);
-            });
+            const response = await fetch('/api/employees');
+            employeesData = await response.json();
         } catch (error) {
             console.error('Error fetching employees:', error);
+            employeesData = [];
         }
     }
 
-    // Call the function to fetch and display data
-    fetchEmployees();
+    async function fetchEmployeeImages() {
+        try {
+            const response = await fetch('/images');
+            imagesData = await response.json();
+        } catch (error) {
+            console.error('Error fetching images:', error);
+            imagesData = [];
+        }
+    }
+
+    function renderEmployeeTable(payments) {
+        const tableBody = document.getElementById('employeeTable');
+        tableBody.innerHTML = '';
+
+        employeesData.forEach(emp => {
+            const row = document.createElement('tr');
+
+            const manager = employeesData.find(manager => manager.empno === emp.mgr);
+            const managerName = manager ? manager.ename : 'N/A';
+
+            const imageUrl = imagesData.find(imgUrl => imgUrl.includes(emp.img)) ||
+                'https://sitechecker.pro/wp-content/uploads/2023/06/404-status-code.png';
+
+            const totalPayment = payments[emp.empno] || 0;
+            const paymentChanged = previousPayments[emp.empno] !== undefined && previousPayments[emp.empno] < totalPayment;
+            previousPayments[emp.empno] = totalPayment;
+
+            row.innerHTML = `
+                <td><img class="employee-image" src="${imageUrl}" alt="${emp.ename}"></td>
+                <td>${emp.empno}</td>
+                <td>${managerName}</td>
+                <td>${emp.ename}</td>
+                <td><span class="badge badge-secondary">${emp.job}</span></td>
+                <td>$${parseFloat(emp.sal).toLocaleString()}</td>
+                <td>${emp.dept ? emp.dept.dname : 'N/A'}</td>
+                <td>${emp.dept ? emp.dept.loc : 'N/A'}</td>
+                <td class="${paymentChanged ? 'highlight payment-changed' : ''}">$${totalPayment.toFixed(2)}</td>
+            `;
+
+            if (paymentChanged) {
+                row.classList.add('payment-changed');
+            }
+
+            tableBody.appendChild(row);
+        });
+    }
+
+    async function updatePayments() {
+        const payments = await fetchPayments();
+        renderEmployeeTable(payments);
+    }
+
+    // Initial load
+    (async function init() {
+        await fetchEmployees();
+        await fetchEmployeeImages();
+        await updatePayments();
+        setInterval(updatePayments, 1000);
+    })();
 </script>
 </body>
 </html>
