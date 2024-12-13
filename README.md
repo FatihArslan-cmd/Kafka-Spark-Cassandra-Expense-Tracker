@@ -44,9 +44,11 @@
 </ul>
 <hr>
 
-<h2 id="screenshots">Screenshots</h2>
+<h2 id="screenshots">GIFS</h2>
 <div align="center">
    <img src="https://github.com/user-attachments/assets/97d586f9-4c52-465f-8d49-b6f370741796" alt="AWS S3 Logo"/>
+   <img src="https://github.com/user-attachments/assets/8286f428-32b4-4af6-a109-3909df3335c1" alt="AWS S3 Logo"/>
+
 </div>
 
 <h2 id="getting-started">🚀 Getting Started</h2>
