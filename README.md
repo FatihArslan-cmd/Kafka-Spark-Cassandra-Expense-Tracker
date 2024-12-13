@@ -6,9 +6,9 @@
 <p align="center">
     <img src="https://miro.medium.com/v2/resize:fit:1280/0*lrhD8e1zlemTCUvT.png" alt="Spring Boot Logo" width="200"/>
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8i4zPog-0j0JR_yZglxPhTPZXxN2iMTQ3Dw&s" alt="AWS S3 Logo" width="150"/>
-    <img src="https://www.google.com/imgres?q=kafka&imgurl=https%3A%2F%2Fwww.mshowto.org%2Fimages%2Farticles%2F2017%2F02%2Fkafka-logo-600x390-1.webp&imgrefurl=https%3A%2F%2Fwww.mshowto.org%2Fapache-kafka-nedir-genel-bakis-bolum-1.html&docid=YPkvfLDia9SVsM&tbnid=iL8GN1vaGLzM7M&vet=12ahUKEwiZstCIvaKKAxVnA9sEHejMF9UQM3oECBYQAA..i&w=600&h=390&hcb=2&ved=2ahUKEwiZstCIvaKKAxVnA9sEHejMF9UQM3oECBYQAA" alt="AWS S3 Logo" width="150"/>
-    <img src="https://www.google.com/imgres?q=spark&imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Ff%2Ff3%2FApache_Spark_logo.svg&imgrefurl=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FApache_Spark&docid=hiDEHrBZsj1BWM&tbnid=95Jm1xx4s_Y_yM&vet=12ahUKEwiE2rnivaKKAxUMVPEDHX_HD44QM3oECHwQAA..i&w=800&h=416&hcb=2&ved=2ahUKEwiE2rnivaKKAxUMVPEDHX_HD44QM3oECHwQAA" alt="AWS S3 Logo" width="150"/>
-    <img src="https://www.google.com/imgres?q=cassandra&imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F5%2F5e%2FCassandra_logo.svg%2F1200px-Cassandra_logo.svg.png&imgrefurl=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FApache_Cassandra&docid=xMhOF7ibPWEOJM&tbnid=iCeDbF5h58az7M&vet=12ahUKEwjcv-nwvaKKAxXWR_EDHYhfBXwQM3oECG4QAA..i&w=1200&h=806&hcb=2&ved=2ahUKEwjcv-nwvaKKAxXWR_EDHYhfBXwQM3oECG4QAA" alt="AWS S3 Logo" width="150"/>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeP1GXd5UXvKaiSpTapdtMIq_E3GOKFf6G-Q&s" alt="AWS S3 Logo" width="150"/>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYtcqfgWt2mLwBguOoHx2nSqj3PNE39wv-0A&s" alt="AWS S3 Logo" width="150"/>
+    <img src="data:image/png;base64,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" alt="AWS S3 Logo" width="150"/>
 
 </p>
 <br>
@@ -66,7 +66,7 @@
 <h3 id="installation">⚙️ Installation</h3>
 <ol>
     <li>Clone the repository:
-        <pre><code>git clone https://github.com/FatihArslan-cmd/AWS-S3-SPRINGBOOT-INTEGRATION.git</code></pre>
+        <pre><code>git clone https://github.com/FatihArslan-cmd/Kafka-Spark-Cassandra-Expense-Tracker.git</code></pre>
     </li>
     <li>Navigate to the project directory:
         <pre><code>cd demo</code></pre>
@@ -123,7 +123,7 @@ spring.datasource.password=""
     <li>Open your browser and navigate to <a href="http://localhost:8080">http://localhost:8080</a> to view the employee data</li>
 </ul>
 <hr>
-
+<h2 id="dependencies">Important</h2> <ul> <li>Java 17</li> <li>Spring Boot</li> <li>PostgreSQL</li> <li>AWS SDK for Java (for S3 integration)</li> <li>Maven (for build management)</li> </ul> <p> Additionally, Apache Kafka, Apache Spark, and Cassandra are configured to run in an environment with Java 8. These components should be executed under a dedicated user profile set up with Java 8 on Ubuntu. Meanwhile, Spring Boot applications, which require Java 17, should be executed under a separate user profile configured with Java 17 to ensure compatibility. </p> <hr>
 <h2 id="dependencies">📦 Dependencies</h2>
 <ul>
     <li>Java 17</li>
