@@ -8,7 +8,7 @@
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8i4zPog-0j0JR_yZglxPhTPZXxN2iMTQ3Dw&s" alt="AWS S3 Logo" width="150"/>
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeP1GXd5UXvKaiSpTapdtMIq_E3GOKFf6G-Q&s" alt="AWS S3 Logo" width="150"/>
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYtcqfgWt2mLwBguOoHx2nSqj3PNE39wv-0A&s" alt="AWS S3 Logo" width="300"/>
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-wnbFTNJjOzHh72xX6rWUwkJAorljwv8RFA&s" alt="AWS S3 Logo" width="150"/>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-wnbFTNJjOzHh72xX6rWUwkJAorljwv8RFA&s" alt="AWS S3 Logo" width="300"/>
 
 </p>
 <br>
